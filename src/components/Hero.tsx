@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import { ShieldCheck, Fingerprint, Lock, Layers } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Hero = () => {
   const [scrolled, setScrolled] = useState(0);
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,16 +22,16 @@ const Hero = () => {
 
   const handleGetStarted = () => {
     toast({
-      title: "Get Started",
-      description: "Let's begin your secure identity journey!",
+      title: t("getStarted"),
+      description: t("learnMore") + " " + t("getStarted").toLowerCase() + "!",
       duration: 3000,
     });
   };
 
   const handleIntegration = () => {
     toast({
-      title: "Integration Request",
-      description: "Our team will contact you about API integration options.",
+      title: t("integrateWithUs"),
+      description: t("learnMore") + " " + t("integrateWithUs").toLowerCase() + ".",
       duration: 3000,
     });
   };
@@ -49,22 +51,21 @@ const Hero = () => {
             <div className="inline-flex items-center gap-2 bg-vera-blue-50 dark:bg-vera-blue-900/30 border border-vera-blue-200 dark:border-vera-blue-800 rounded-full px-4 py-1.5 mb-6 animate-pulse-slow">
               <ShieldCheck className="h-4 w-4 text-vera-blue-600 dark:text-vera-blue-400" />
               <span className="text-sm font-medium text-vera-blue-700 dark:text-vera-blue-300">
-                Next-gen Identity Platform
+                {t("nextGenIdentity")}
               </span>
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
               <span className="text-gray-900 dark:text-white transition-colors duration-300">
-                Secure. Seamless. Private.
+                {t("secureSeamlessPrivate")}
               </span>{" "}
               <span className="text-gradient transition-colors duration-300">
-                The Future of Digital Identity Verification.
+                {t("futureOfIdentity")}
               </span>
             </h1>
 
             <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-xl mx-auto lg:mx-0 transition-colors duration-300">
-              Protecting your digital identity with blockchain-powered security
-              and privacy-first biometric authentication.
+              {t("protectingYourIdentity")}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -73,7 +74,7 @@ const Hero = () => {
                 className="text-base transition-all duration-300 hover:scale-105 hover:shadow-lg"
                 onClick={handleGetStarted}
               >
-                Get Started
+                {t("getStartedBtn")}
               </Button>
               <Button
                 size="lg"
@@ -81,7 +82,7 @@ const Hero = () => {
                 className="text-base border-vera-blue-200 dark:border-vera-blue-700 transition-all duration-300 hover:scale-105 hover:shadow-lg"
                 onClick={handleIntegration}
               >
-                Integrate with Us
+                {t("integrateWithUs")}
               </Button>
             </div>
           </div>

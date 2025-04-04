@@ -2,17 +2,20 @@
 import { Shield, Fingerprint, Lock, Key, Eye, Code } from "lucide-react";
 import FlipCard from "./FlipCard";
 import CustomTooltip from "./CustomTooltip";
+import { useLanguage } from "@/context/LanguageContext";
 
 const FlipCardFeatures = () => {
+  const { t } = useLanguage();
+
   const features = [
     {
-      title: "Multi-Factor Authentication",
+      title: t("multifactorAuth"),
       icon: <Key className="h-12 w-12 text-vera-blue-600 dark:text-vera-blue-400" />,
-      description: "Protect your account with biometrics, OTPs, and hardware keys for maximum security",
+      description: t("multifactorAuthDesc"),
       tooltipContent: "Combines something you know, something you have, and something you are for unparalleled protection"
     },
     {
-      title: "Biometric Verification",
+      title: t("advancedBiometrics"),
       icon: <Fingerprint className="h-12 w-12 text-vera-blue-600 dark:text-vera-blue-400" />,
       description: "Fast and secure identity verification using facial recognition, fingerprints and voice analysis",
       tooltipContent: "Advanced liveness detection prevents spoofing attempts"
@@ -24,13 +27,13 @@ const FlipCardFeatures = () => {
       tooltipContent: "A cryptographic method ensuring privacy during verification while maintaining security"
     },
     {
-      title: "Blockchain Attestations",
+      title: t("blockchainSecurity"),
       icon: <Shield className="h-12 w-12 text-vera-blue-600 dark:text-vera-blue-400" />,
       description: "Immutable record of identity verification for compliance and audit purposes",
       tooltipContent: "Creates tamper-proof verification records that remain private yet verifiable"
     },
     {
-      title: "Enterprise Integration",
+      title: t("enterpriseSolutions"),
       icon: <Code className="h-12 w-12 text-vera-blue-600 dark:text-vera-blue-400" />,
       description: "Seamlessly connect to existing identity systems with our comprehensive API",
       tooltipContent: "SDKs available for all major platforms with sample code and documentation"
@@ -46,13 +49,13 @@ const FlipCardFeatures = () => {
   return (
     <section className="py-16 px-4 bg-muted/50 dark:bg-muted/10">
       <div className="container mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-4">Platform Capabilities</h2>
+        <h2 className="text-3xl font-bold text-center mb-4">{t("platformCapabilities")}</h2>
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-          Hover over any card to learn more about our feature set, or hover over the
+          {t("flipCardTooltip")}
           <CustomTooltip content="Tooltips provide additional context without cluttering the interface" showIcon={true}>
-            <span className="mx-1 font-medium">info icons</span>
+            <span className="mx-1 font-medium">{t("infoIcons")}</span>
           </CustomTooltip>
-          for quick explanations.
+          {t("forQuickExplanations")}
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

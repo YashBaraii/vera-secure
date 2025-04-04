@@ -1,62 +1,21 @@
 
 import { Moon, Sun } from "lucide-react";
-import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
+import { useTheme } from "@/hooks/use-theme";
 
-export const ThemeToggle = () => {
-  const [theme, setTheme] = useState<"light" | "dark">(
-    () => (localStorage.getItem("theme") as "light" | "dark") || "light"
-  );
-  const { toast } = useToast();
-
-  useEffect(() => {
-    const root = window.document.documentElement;
-    root.classList.remove("light", "dark");
-    root.classList.add(theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-
-  useEffect(() => {
-    // Check for system preference on initial load
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    if (!localStorage.getItem("theme")) {
-      setTheme(mediaQuery.matches ? "dark" : "light");
-    }
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      if (!localStorage.getItem("theme")) {
-        setTheme(e.matches ? "dark" : "light");
-      }
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    toast({
-      title: `${newTheme.charAt(0).toUpperCase() + newTheme.slice(1)} mode activated`,
-      description: `The interface has been switched to ${newTheme} mode.`,
-      duration: 2000,
-    });
-  };
+export function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
 
   return (
-    <Button 
-      variant="ghost" 
-      size="icon" 
-      onClick={toggleTheme}
-      className="transition-all duration-300 hover:scale-110"
-      aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+    <Button
+      variant="ghost"
+      size="sm"
+      className="h-8 w-8 px-0 smooth-transition"
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
-      {theme === "light" ? (
-        <Moon className="h-5 w-5 text-gray-700 transition-all duration-300" />
-      ) : (
-        <Sun className="h-5 w-5 text-yellow-300 transition-all duration-300" />
-      )}
+      <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+      <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+      <span className="sr-only">Toggle theme</span>
     </Button>
   );
-};
+}

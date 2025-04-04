@@ -3,10 +3,13 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Shield, Menu, X } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,36 +47,42 @@ const Navbar = () => {
                 href="#features"
                 className="text-gray-700 dark:text-gray-300 hover:text-vera-blue-600 dark:hover:text-vera-blue-400 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-vera-blue-600 dark:after:bg-vera-blue-400 after:transition-all hover:after:w-full"
               >
-                Features
+                {t("features")}
               </a>
               <a
                 href="#how-it-works"
                 className="text-gray-700 dark:text-gray-300 hover:text-vera-blue-600 dark:hover:text-vera-blue-400 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-vera-blue-600 dark:after:bg-vera-blue-400 after:transition-all hover:after:w-full"
               >
-                How It Works
+                {t("howItWorks")}
               </a>
               <a
                 href="#partners"
                 className="text-gray-700 dark:text-gray-300 hover:text-vera-blue-600 dark:hover:text-vera-blue-400 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-vera-blue-600 dark:after:bg-vera-blue-400 after:transition-all hover:after:w-full"
               >
-                Partners
+                {t("partners")}
               </a>
               <a
                 href="#pricing"
                 className="text-gray-700 dark:text-gray-300 hover:text-vera-blue-600 dark:hover:text-vera-blue-400 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-vera-blue-600 dark:after:bg-vera-blue-400 after:transition-all hover:after:w-full"
               >
-                Pricing
+                {t("pricing")}
               </a>
             </div>
             <div className="flex gap-3 items-center">
+              <LanguageSwitcher />
               <ThemeToggle />
-              <Button variant="outline" className="transition-transform hover:scale-105">Log In</Button>
-              <Button className="transition-transform hover:scale-105 hover:bg-vera-blue-700">Get Started</Button>
+              <Button variant="outline" className="transition-transform hover:scale-105">
+                {t("login")}
+              </Button>
+              <Button className="transition-transform hover:scale-105 hover:bg-vera-blue-700">
+                {t("getStarted")}
+              </Button>
             </div>
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center gap-2">
+            <LanguageSwitcher />
             <ThemeToggle />
             <button
               className="p-2"
@@ -98,34 +107,36 @@ const Navbar = () => {
               className="text-gray-700 dark:text-gray-300 hover:text-vera-blue-600 dark:hover:text-vera-blue-400 py-2 transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Features
+              {t("features")}
             </a>
             <a
               href="#how-it-works"
               className="text-gray-700 dark:text-gray-300 hover:text-vera-blue-600 dark:hover:text-vera-blue-400 py-2 transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              How It Works
+              {t("howItWorks")}
             </a>
             <a
               href="#partners"
               className="text-gray-700 dark:text-gray-300 hover:text-vera-blue-600 dark:hover:text-vera-blue-400 py-2 transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Partners
+              {t("partners")}
             </a>
             <a
               href="#pricing"
               className="text-gray-700 dark:text-gray-300 hover:text-vera-blue-600 dark:hover:text-vera-blue-400 py-2 transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Pricing
+              {t("pricing")}
             </a>
             <div className="pt-4 flex flex-col gap-3">
               <Button variant="outline" className="w-full">
-                Log In
+                {t("login")}
               </Button>
-              <Button className="w-full">Get Started</Button>
+              <Button className="w-full">
+                {t("getStarted")}
+              </Button>
             </div>
           </div>
         </div>

@@ -1,7 +1,11 @@
 
 import { Shield, Facebook, Twitter, Instagram, Linkedin, Github, Mail, Phone } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 const Footer = () => {
+  const { t } = useLanguage();
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="bg-gray-900 text-white pt-16 pb-8 px-4 md:px-6">
       <div className="container mx-auto">
@@ -13,7 +17,7 @@ const Footer = () => {
               <span className="text-xl font-bold">VERA</span>
             </div>
             <p className="text-gray-400 mb-4">
-              Building a safer digital world where identity verification is secure and seamless.
+              {t("saferDigitalWorld")}
             </p>
             <div className="flex gap-4">
               <a href="#" className="text-gray-400 hover:text-vera-blue-400 transition-colors">
@@ -36,31 +40,31 @@ const Footer = () => {
 
           {/* Quick links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("quickLinks")}</h3>
             <ul className="space-y-2">
               <li>
                 <a href="#features" className="text-gray-400 hover:text-white transition-colors">
-                  Features
+                  {t("features")}
                 </a>
               </li>
               <li>
                 <a href="#how-it-works" className="text-gray-400 hover:text-white transition-colors">
-                  How It Works
+                  {t("howItWorks")}
                 </a>
               </li>
               <li>
                 <a href="#partners" className="text-gray-400 hover:text-white transition-colors">
-                  Partners
+                  {t("partners")}
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Pricing
+                  {t("pricing")}
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  About Us
+                  {t("aboutUs")}
                 </a>
               </li>
             </ul>
@@ -68,31 +72,31 @@ const Footer = () => {
 
           {/* Resources */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Resources</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("resources")}</h3>
             <ul className="space-y-2">
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Knowledge Base
+                  {t("knowledgeBase")}
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Developer Docs
+                  {t("developerDocs")}
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  API Reference
+                  {t("apiReference")}
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  Blog
+                  {t("blog")}
                 </a>
               </li>
               <li>
                 <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                  FAQs
+                  {t("faqs")}
                 </a>
               </li>
             </ul>
@@ -100,7 +104,7 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+            <h3 className="text-lg font-semibold mb-4">{t("contactUs")}</h3>
             <ul className="space-y-3">
               <li className="flex items-center">
                 <Mail className="h-5 w-5 text-vera-blue-500 mr-2" />
@@ -116,15 +120,15 @@ const Footer = () => {
               </li>
             </ul>
             <div className="mt-6 bg-gray-800 p-4 rounded-lg">
-              <h4 className="text-sm font-semibold mb-2">Subscribe to Our Newsletter</h4>
+              <h4 className="text-sm font-semibold mb-2">{t("subscribeNewsletter")}</h4>
               <div className="flex">
                 <input
                   type="email"
-                  placeholder="Your email"
+                  placeholder={t("yourEmail")}
                   className="flex-grow px-3 py-2 bg-gray-700 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-vera-blue-500 text-white"
                 />
                 <button className="bg-vera-blue-600 hover:bg-vera-blue-700 px-4 py-2 rounded-r-lg transition-colors">
-                  Subscribe
+                  {t("subscribe")}
                 </button>
               </div>
             </div>
@@ -134,17 +138,17 @@ const Footer = () => {
         <div className="border-t border-gray-800 pt-8 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-500 text-sm mb-4 md:mb-0">
-              &copy; {new Date().getFullYear()} VERA Digital Identity. All rights reserved.
+              &copy; {currentYear} VERA Digital Identity. {t("allRightsReserved")}
             </p>
             <div className="flex gap-6">
               <a href="#" className="text-gray-500 hover:text-gray-400 text-sm">
-                Privacy Policy
+                {t("privacyPolicy")}
               </a>
               <a href="#" className="text-gray-500 hover:text-gray-400 text-sm">
-                Terms of Service
+                {t("termsOfService")}
               </a>
               <a href="#" className="text-gray-500 hover:text-gray-400 text-sm">
-                Security
+                {t("security")}
               </a>
             </div>
           </div>

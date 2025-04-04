@@ -13,6 +13,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface FeatureCardProps {
   icon: React.ReactNode;
@@ -55,56 +56,57 @@ const FeatureCard = ({ icon, title, description, className, delay = 0, onClick }
   );
 };
 
-const features = [
-  {
-    icon: <ShieldCheck className="h-8 w-8" />,
-    title: "Multi-factor Authentication",
-    description: "Enhance security with multiple verification layers including biometrics, smart devices, and knowledge-based verification."
-  },
-  {
-    icon: <Layers className="h-8 w-8" />,
-    title: "Blockchain-powered Security",
-    description: "Immutable digital identity records using distributed ledger technology to prevent tampering and fraud."
-  },
-  {
-    icon: <Code className="h-8 w-8" />,
-    title: "Seamless API Integration",
-    description: "Easy integration with your existing systems through comprehensive SDKs and RESTful APIs."
-  },
-  {
-    icon: <LockKeyhole className="h-8 w-8" />,
-    title: "Privacy-first Encryption",
-    description: "End-to-end encryption with zero-knowledge proofs ensuring your identity data stays private."
-  },
-  {
-    icon: <Database className="h-8 w-8" />,
-    title: "Decentralized Storage",
-    description: "Your identity is stored securely across distributed nodes, eliminating single points of failure."
-  },
-  {
-    icon: <RefreshCw className="h-8 w-8" />,
-    title: "Continuous Verification",
-    description: "Ongoing identity verification that adapts to new threats and changing security landscapes."
-  },
-  {
-    icon: <Users className="h-8 w-8" />,
-    title: "Enterprise Solutions",
-    description: "Scalable identity verification for organizations of all sizes with custom security policies."
-  },
-  {
-    icon: <Fingerprint className="h-8 w-8" />,
-    title: "Advanced Biometrics",
-    description: "Cutting-edge facial, fingerprint, and behavioral biometric verification technologies."
-  }
-];
-
 const Features = () => {
   const { toast } = useToast();
+  const { t } = useLanguage();
 
-  const handleFeatureClick = (feature: { title: string; description: string }) => {
+  const features = [
+    {
+      icon: <ShieldCheck className="h-8 w-8" />,
+      title: t("multifactorAuth"),
+      description: t("multifactorAuthDesc")
+    },
+    {
+      icon: <Layers className="h-8 w-8" />,
+      title: t("blockchainSecurity"),
+      description: t("blockchainSecurityDesc")
+    },
+    {
+      icon: <Code className="h-8 w-8" />,
+      title: t("apiIntegration"),
+      description: t("apiIntegrationDesc")
+    },
+    {
+      icon: <LockKeyhole className="h-8 w-8" />,
+      title: t("privacyEncryption"),
+      description: t("privacyEncryptionDesc")
+    },
+    {
+      icon: <Database className="h-8 w-8" />,
+      title: t("decentralizedStorage"),
+      description: t("decentralizedStorageDesc")
+    },
+    {
+      icon: <RefreshCw className="h-8 w-8" />,
+      title: t("continuousVerification"),
+      description: t("continuousVerificationDesc")
+    },
+    {
+      icon: <Users className="h-8 w-8" />,
+      title: t("enterpriseSolutions"),
+      description: t("enterpriseSolutionsDesc")
+    },
+    {
+      icon: <Fingerprint className="h-8 w-8" />,
+      title: t("advancedBiometrics"),
+      description: t("advancedBiometricsDesc")
+    }
+  ];
+
+  const handleFeatureClick = (feature: { title: string }) => {
     toast({
       title: feature.title,
-      description: `Learn more about ${feature.title.toLowerCase()}`,
+      description: `${t("learnMore")} ${feature.title.toLowerCase()}`,
       duration: 3000,
     });
   };
@@ -114,10 +116,10 @@ const Features = () => {
       <div className="container mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
-            Advanced Security Features
+            {t("advancedSecurityFeatures")}
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300">
-            Our platform combines cutting-edge technologies to provide the most secure and user-friendly identity verification experience.
+            {t("platformFeatures")}
           </p>
         </div>
 
