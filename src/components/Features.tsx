@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 interface FeatureCardProps {
   icon: React.ReactNode;
@@ -18,16 +20,32 @@ interface FeatureCardProps {
   description: string;
   className?: string;
   delay?: number;
+  onClick?: () => void;
 }
 
-const FeatureCard = ({ icon, title, description, className, delay = 0 }: FeatureCardProps) => {
+const FeatureCard = ({ icon, title, description, className, delay = 0, onClick }: FeatureCardProps) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
-    <Card className={cn(
-      "border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm hover:shadow-md transition-all overflow-hidden group", 
-      className
-    )}>
+    <Card 
+      className={cn(
+        "border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm hover:shadow-md transition-all overflow-hidden group", 
+        isHovered ? "transform -translate-y-2" : "",
+        className
+      )}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={onClick}
+      style={{ 
+        animationDelay: `${delay}ms`,
+        cursor: onClick ? 'pointer' : 'default'
+      }}
+    >
       <CardContent className="p-6 flex flex-col items-center text-center">
-        <div className="mb-4 p-3 rounded-full bg-vera-blue-50 dark:bg-vera-blue-900/30 text-vera-blue-600 dark:text-vera-blue-400 group-hover:scale-110 transition-transform duration-300">
+        <div className={cn(
+          "mb-4 p-3 rounded-full bg-vera-blue-50 dark:bg-vera-blue-900/30 text-vera-blue-600 dark:text-vera-blue-400 transition-all duration-300",
+          isHovered ? "scale-110 rotate-3" : ""
+        )}>
           {icon}
         </div>
         <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{title}</h3>
@@ -81,10 +99,20 @@ const features = [
 ];
 
 const Features = () => {
+  const { toast } = useToast();
+
+  const handleFeatureClick = (feature: { title: string; description: string }) => {
+    toast({
+      title: feature.title,
+      description: `Learn more about ${feature.title.toLowerCase()}`,
+      duration: 3000,
+    });
+  };
+
   return (
-    <section id="features" className="py-20 px-4 md:px-6 bg-gray-50 dark:bg-gray-900">
+    <section id="features" className="py-20 px-4 md:px-6 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       <div className="container mx-auto">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
             Advanced Security Features
           </h2>
@@ -95,13 +123,19 @@ const Features = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
-            <FeatureCard
+            <div 
               key={index}
-              icon={feature.icon}
-              title={feature.title}
-              description={feature.description}
-              delay={index * 0.1}
-            />
+              className="animate-fade-in"
+              style={{ animationDelay: `${index * 150}ms` }}
+            >
+              <FeatureCard
+                icon={feature.icon}
+                title={feature.title}
+                description={feature.description}
+                delay={index * 100}
+                onClick={() => handleFeatureClick(feature)}
+              />
+            </div>
           ))}
         </div>
       </div>

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Shield, Menu, X } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -28,7 +29,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           <a href="#" className="flex items-center gap-2">
             <Shield
-              className="h-8 w-8 text-vera-blue-600"
+              className="h-8 w-8 text-vera-blue-600 animate-pulse-slow"
               strokeWidth={1.5}
             />
             <span className="text-xl font-bold text-vera-blue-950 dark:text-white">
@@ -41,46 +42,50 @@ const Navbar = () => {
             <div className="flex gap-6">
               <a
                 href="#features"
-                className="text-gray-700 dark:text-gray-300 hover:text-vera-blue-600 dark:hover:text-vera-blue-400 transition-colors"
+                className="text-gray-700 dark:text-gray-300 hover:text-vera-blue-600 dark:hover:text-vera-blue-400 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-vera-blue-600 dark:after:bg-vera-blue-400 after:transition-all hover:after:w-full"
               >
                 Features
               </a>
               <a
                 href="#how-it-works"
-                className="text-gray-700 dark:text-gray-300 hover:text-vera-blue-600 dark:hover:text-vera-blue-400 transition-colors"
+                className="text-gray-700 dark:text-gray-300 hover:text-vera-blue-600 dark:hover:text-vera-blue-400 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-vera-blue-600 dark:after:bg-vera-blue-400 after:transition-all hover:after:w-full"
               >
                 How It Works
               </a>
               <a
                 href="#partners"
-                className="text-gray-700 dark:text-gray-300 hover:text-vera-blue-600 dark:hover:text-vera-blue-400 transition-colors"
+                className="text-gray-700 dark:text-gray-300 hover:text-vera-blue-600 dark:hover:text-vera-blue-400 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-vera-blue-600 dark:after:bg-vera-blue-400 after:transition-all hover:after:w-full"
               >
                 Partners
               </a>
               <a
                 href="#pricing"
-                className="text-gray-700 dark:text-gray-300 hover:text-vera-blue-600 dark:hover:text-vera-blue-400 transition-colors"
+                className="text-gray-700 dark:text-gray-300 hover:text-vera-blue-600 dark:hover:text-vera-blue-400 transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-vera-blue-600 dark:after:bg-vera-blue-400 after:transition-all hover:after:w-full"
               >
                 Pricing
               </a>
             </div>
-            <div className="flex gap-3">
-              <Button variant="outline">Log In</Button>
-              <Button>Get Started</Button>
+            <div className="flex gap-3 items-center">
+              <ThemeToggle />
+              <Button variant="outline" className="transition-transform hover:scale-105">Log In</Button>
+              <Button className="transition-transform hover:scale-105 hover:bg-vera-blue-700">Get Started</Button>
             </div>
           </div>
 
           {/* Mobile menu button */}
-          <button
-            className="md:hidden p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? (
-              <X className="h-6 w-6 text-gray-700 dark:text-gray-300" />
-            ) : (
-              <Menu className="h-6 w-6 text-gray-700 dark:text-gray-300" />
-            )}
-          </button>
+          <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle />
+            <button
+              className="p-2"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? (
+                <X className="h-6 w-6 text-gray-700 dark:text-gray-300" />
+              ) : (
+                <Menu className="h-6 w-6 text-gray-700 dark:text-gray-300" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
 
