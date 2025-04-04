@@ -1,6 +1,6 @@
 
 import { 
-  FingerCog,
+  Fingerprint,
   ShieldCheck, 
   LockKeyhole, 
   Database, 
@@ -74,7 +74,7 @@ const features = [
     description: "Scalable identity verification for organizations of all sizes with custom security policies."
   },
   {
-    icon: <FingerCog className="h-8 w-8" />,
+    icon: <Fingerprint className="h-8 w-8" />,
     title: "Advanced Biometrics",
     description: "Cutting-edge facial, fingerprint, and behavioral biometric verification technologies."
   }

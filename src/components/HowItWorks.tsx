@@ -4,7 +4,7 @@ import {
   Fingerprint, 
   CheckCircle, 
   UserPlus, 
-  ShieldLock, 
+  Shield, 
   Key 
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -82,7 +82,7 @@ const HowItWorks = () => {
               number={3}
               title="Blockchain Certification"
               description="Your verified identity is encrypted and certified on the blockchain, creating a tamper-proof digital identity that you control."
-              icon={<ShieldLock className="h-6 w-6" />}
+              icon={<Shield className="h-6 w-6" />}
             />
             
             <ProcessStep
