@@ -1,12 +1,13 @@
-
 import { Button } from "@/components/ui/button";
 import { ShieldCheck, Fingerprint, Lock, Layers } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/context/LanguageContext";
+import "@/styles/hero.css";
 
 const Hero = () => {
   const [scrolled, setScrolled] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const { toast } = useToast();
   const { t } = useLanguage();
 
@@ -16,8 +17,20 @@ const Hero = () => {
       setScrolled(position);
     };
 
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+      const x = (clientX / innerWidth - 0.5) * 2;
+      const y = (clientY / innerHeight - 0.5) * 2;
+      setMousePosition({ x, y });
+    };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, []);
 
   const handleGetStarted = () => {
@@ -87,29 +100,53 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Hero visual */}
-          <div className="flex-1 relative">
-            <div className="relative w-full aspect-square max-w-md mx-auto animate-float">
+          {/* Hero visual with 3D effect */}
+          <div className="flex-1 relative perspective-1000">
+            <div 
+              className="relative h-[500px] w-full transform-gpu transition-transform duration-500"
+              style={{
+                transform: `rotateY(${mousePosition.x * 10}deg) rotateX(${-mousePosition.y * 10}deg)`,
+              }}
+            >
               <div className="absolute inset-0 bg-gradient-to-br from-vera-blue-600/20 to-vera-teal-500/20 rounded-full blur-3xl dark:from-vera-blue-600/40 dark:to-vera-teal-500/40 transition-colors duration-500"></div>
               
-              {/* Identity Verification Animation */}
+              {/* 3D Identity Verification Animation */}
               <div className="relative h-full flex items-center justify-center">
-                <div className="w-64 h-64 rounded-full bg-gradient-to-r from-vera-blue-500/10 to-vera-teal-400/10 dark:from-vera-blue-500/20 dark:to-vera-teal-400/20 backdrop-blur-sm border border-white/20 dark:border-white/10 flex items-center justify-center shadow-lg transition-all duration-500 hover:scale-105">
+                <div 
+                  className="w-64 h-64 rounded-full bg-gradient-to-r from-vera-blue-500/10 to-vera-teal-400/10 dark:from-vera-blue-500/20 dark:to-vera-teal-400/20 backdrop-blur-sm border border-white/20 dark:border-white/10 flex items-center justify-center shadow-lg transition-all duration-500 hover:scale-105"
+                  style={{
+                    transform: `translateZ(50px) rotateY(${mousePosition.x * 5}deg) rotateX(${-mousePosition.y * 5}deg)`,
+                  }}
+                >
                   <Fingerprint className="h-32 w-32 text-vera-blue-500 dark:text-vera-blue-400 animate-pulse-slow transition-colors duration-300" />
                 </div>
                 
-                {/* Orbiting elements */}
-                <div className="absolute w-full h-full animate-spin-slow" style={{ animationDuration: '15s' }}>
+                {/* Orbiting elements with 3D effect */}
+                <div 
+                  className="absolute w-full h-full animate-spin-slow" 
+                  style={{ 
+                    animationDuration: '15s',
+                    transform: `translateZ(30px) rotateY(${mousePosition.x * 8}deg) rotateX(${-mousePosition.y * 8}deg)`,
+                  }}
+                >
                   <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <div className="w-12 h-12 rounded-full bg-white dark:bg-gray-800 flex items-center justify-center shadow-md transition-colors duration-300 hover:scale-110">
+                    <div 
+                      className="w-12 h-12 rounded-full bg-white dark:bg-gray-800 flex items-center justify-center shadow-md transition-colors duration-300 hover:scale-110"
+                      style={{
+                        transform: `translateZ(20px)`,
+                      }}
+                    >
                       <Lock className="h-6 w-6 text-vera-blue-600 dark:text-vera-blue-400" />
                     </div>
                   </div>
-                </div>
-                
-                <div className="absolute w-full h-full animate-spin-slow" style={{ animationDuration: '20s', animationDirection: 'reverse' }}>
+                  
                   <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
-                    <div className="w-12 h-12 rounded-full bg-white dark:bg-gray-800 flex items-center justify-center shadow-md transition-colors duration-300 hover:scale-110">
+                    <div 
+                      className="w-12 h-12 rounded-full bg-white dark:bg-gray-800 flex items-center justify-center shadow-md transition-colors duration-300 hover:scale-110"
+                      style={{
+                        transform: `translateZ(20px)`,
+                      }}
+                    >
                       <Layers className="h-6 w-6 text-vera-teal-600 dark:text-vera-teal-400" />
                     </div>
                   </div>
